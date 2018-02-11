@@ -5,8 +5,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/ethersocial/ethersocial-pool/rpc"
-	"github.com/ethersocial/ethersocial-pool/util"
+	"github.com/mineesc/open-open-ethersocial-pool/rpc"
+	"github.com/mineesc/open-open-ethersocial-pool/util"
 )
 
 // Allow only lowercase hexadecimal with 0x prefix

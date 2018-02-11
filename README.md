@@ -2,7 +2,7 @@
 
 ![Miner's stats page](https://user-images.githubusercontent.com/7374093/31591180-43c72364-b236-11e7-8d47-726cd66b876a.png)
 
-[![Join the chat at https://gitter.im/sammy007/open-ethereum-pool](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sammy007/open-ethereum-pool?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/sammy007/open-ethereum-pool.svg?branch=develop)](https://travis-ci.org/sammy007/open-ethereum-pool) [![Go Report Card](https://goreportcard.com/badge/https://github.com/ethersocial/ethersocial-pool)](https://goreportcard.com/report/https://github.com/ethersocial/ethersocial-pool)
+[![Join the chat at https://gitter.im/sammy007/open-ethereum-pool](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sammy007/open-ethereum-pool?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/mineesc/open-open-ethersocial-pool.svg?branch=master)](https://travis-ci.org/mineesc/open-open-ethersocial-pool) [![Go Report Card](https://goreportcard.com/badge/github.com/mineesc/open-open-ethersocial-pool)](https://goreportcard.com/report/github.com/mineesc/open-open-ethersocial-pool)
 
 ### Features
 
@@ -18,7 +18,7 @@
 #### Proxies
 
 * [Ether-Proxy](https://github.com/sammy007/ether-proxy) HTTP proxy with web interface
-* [Stratum Proxy](https://github.com/Atrides/eth-proxy) for EtherSocial
+* [Stratum Proxy](https://github.com/Atrides/eth-proxy) for Ethereum
 
 ### Building on Linux
 
@@ -36,7 +36,7 @@ Dependencies:
 
     $ sudo apt-get install -y build-essential
     $ wget https://redirector.gvt1.com/edgedl/go/go1.9.2.linux-amd64.tar.gz
-    $ tar zxvf go1.9.2.linux-amd64.tar.gz 
+    $ tar zxvf go1.9.2.linux-amd64.tar.gz
     $ sudo mv go /usr/local
 
 아래 명령어를 입력합니다.
@@ -109,7 +109,7 @@ nginx 설정은 다른 구글문서를 참고해주세요.
 우분투에서는 screen 명령어를 이용해서 활용을 하는 것이 터미널을 관리할 때 편리합니다. 구글에서 ubuntu screen 을 검색해서 사용법을 익혀주세요.
 
     $ screen -S esc1
-    $ gesc --cache=1024 --rpc --rpcaddr 127.0.0.1 --rpcport 8545 --rpcapi "eth,net,web3" console
+    $ gesc --cache=1024 --rpc --rpcaddr 127.0.0.1 --rpcport 9545 --rpcapi "eth,net,web3" console
     Crtl + a, d
 
 원래 터미널로 다시 돌아가고 싶을때는
@@ -130,13 +130,13 @@ nginx 설정은 다른 구글문서를 참고해주세요.
 ### ethersocial pool 설치
 
     $ git config --global http.https://gopkg.in.followRedirects true
-    $ git clone https://github.com/ethersocial/ethersocial-pool
-    $ cd ethersocial-pool
+    $ git clone https://github.com/mineesc/open-open-ethersocial-pool
+    $ cd open-ethersocial-pool
     $ chmod 755 build/*
     $ make all
 
-다음을 했을 때 ethersocial-pool 이 나오면 설치 성공입니다.
-    $ ls ~/ethersocial-pool/build/bin/
+다음을 했을 때 open-ethersocial-pool 이 나오면 설치 성공입니다.
+    $ ls ~/open-ethersocial-pool/build/bin/
 
 ### ethersocial pool 설정
     $ mv config.example.json config.json
@@ -262,12 +262,12 @@ nginx 설정은 다른 구글문서를 참고해주세요.
   "upstream": [
     {
       "name": "main",
-      "url": "http://127.0.0.1:8545",
+      "url": "http://127.0.0.1:9545",
       "timeout": "10s"
     },
     {
       "name": "backup",
-      "url": "http://127.0.0.2:8545",
+      "url": "http://127.0.0.2:9545",
       "timeout": "10s"
     }
   ],
@@ -287,8 +287,7 @@ nginx 설정은 다른 구글문서를 참고해주세요.
     // Pool fee percentage
     "poolFee": 1.0,
     // 풀피를 받을 주소입니다. 서버내의 지갑 주소로 해도 되지만 서버로의 해킹 공격이 많기 때문에 가능하면 서버 외부의 개인지갑 주소로 하는 것이 안전합니다.
-    "poolFeeAddress": "0x8b92c50e1c39466f900a578edb20a49356c4fe24",
-    // 풀 제작자에게 풀피 중 일부를 기증하는 부분입니다. 현재 풀 피중의 5%를 기증하는 것으로 설정되어 있습니다. 만일 풀피가 1%라면 그 중의 5%이므로 0.05%가 개발자에게 갑니다.
+    "poolFeeAddress": "",
     "donate": true,
     // Unlock only if this number of blocks mined back
     "depth": 120,
@@ -299,7 +298,7 @@ nginx 설정은 다른 구글문서를 참고해주세요.
     // Run unlocker in this interval
     "interval": "10m",
     // Gesc instance node rpc endpoint for unlocking blocks
-    "daemon": "http://127.0.0.1:8545",
+    "daemon": "http://127.0.0.1:9545",
     // Rise error if can't reach geth in this amount of time
     "timeout": "10s"
   },
@@ -310,9 +309,9 @@ nginx 설정은 다른 구글문서를 참고해주세요.
     // Require minimum number of peers on node
     "requirePeers": 2,
     // Run payouts in this interval
-    "interval": "12h",
+    "interval": "10m",
     // Gesc instance node rpc endpoint for payouts processing
-    "daemon": "http://127.0.0.1:8545",
+    "daemon": "http://127.0.0.1:9545",
     // Rise error if can't reach geth in this amount of time
     "timeout": "10s",
     // Address with pool balance 풀 coinbase 지갑의 주소.
@@ -322,10 +321,10 @@ nginx 설정은 다른 구글문서를 참고해주세요.
     // Gas amount and price for payout tx (advanced users only)
     "gas": "21000",
     "gasPrice": "50000000000",
-    // 채굴보상 분배 최소량입니다. 현재 100 ESC로 설정되어 있습니다.
-    "threshold": 10000000000,
+    // 채굴보상 분배 최소량입니다. 현재 1 ESC로 설정되어 있습니다.
+    "threshold": 100000000,
     // Perform BGSAVE on Redis after successful payouts session
-    "bgsave": false
+    "bgsave": true
   }
 }
 ```
@@ -344,8 +343,8 @@ I recommend this deployment strategy:
 마찬가지로 screen을 실행한 후 풀을 실행해야 합니다. 그렇지 않으면 터미널이 닫히면서 풀 동작이 멈춥니다.
 
     $ screen -S pool1
-    $ cd ~/ethersocial-pool
-    $ ./build/bin/ethersocial-pool config.json
+    $ cd ~/open-ethersocial-pool
+    $ ./build/bin/open-ethersocial-pool config.json
     Crtl + a, d
 
 해당 스크린으로 돌아가려면 다음과 같이 입력합니다.
@@ -353,7 +352,7 @@ I recommend this deployment strategy:
     $ screen -r pool1
 
 
-여기까지해서 백엔드 작동을 완료했습니다. 
+여기까지해서 백엔드 작동을 완료했습니다.
 
 
 ### 방화벽 오픈
@@ -366,7 +365,7 @@ I recommend this deployment strategy:
 
 ### 설정파일 수정
 
-    $ vi ~/ethersocial-pool/www/config/environment.js
+    $ vi ~/open-ethersocial-pool/www/config/environment.js
 
 다음 부분을 적절히 변경합니다.
 
@@ -382,7 +381,7 @@ Install nodejs. I suggest using LTS version >= 4.x from https://github.com/nodes
 
 The frontend is a single-page Ember.js application that polls the pool API to render miner stats.
 
-    $ cd ~/ethersocial-pool/www
+    $ cd ~/open-ethersocial-pool/www
     $ sudo npm install -g ember-cli@2.9.1
     $ sudo npm install -g bower
     $ npm install
@@ -390,7 +389,7 @@ The frontend is a single-page Ember.js application that polls the pool API to re
     $ chmod 755 build.sh
     $ ./build.sh
     $ mkdir ~/www
-    $ mv ~/ethersocial-pool/www/dist/* ~/www/
+    $ mv ~/open-ethersocial-pool/www/dist/* ~/www/
 
 위 처럼 풀의 홈페이지 부분 프론트엔드를 만들었습니다. 그리고 그 파일을 서비스할 디렉토리 www로 이동합니다.
 
@@ -401,7 +400,7 @@ nginx를 설정해야합니다.
 
 다음 설정파일을 보고 적절히 수정합니다.
 
-    # Default server configuration 
+    # Default server configuration
     # nginx 설정 예제.
 
     upstream api {
@@ -437,5 +436,3 @@ nginx를 설정해야합니다.
 
 웹브라우저에서 자신의 홈페이지 또는 IP를 입력해봅니다.
 화면이 제대로 뜨고 있다면 풀 설치 성공입니다.
-
-
