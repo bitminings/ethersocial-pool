@@ -154,6 +154,7 @@ nginx 설정은 다른 구글문서를 참고해주세요.
   "name": "main",
 
   "proxy": {
+    "hashLimit" : 240000000,
     "enabled": true,
 
     // Bind HTTP mining endpoint to this IP:PORT
@@ -307,7 +308,7 @@ nginx 설정은 다른 구글문서를 참고해주세요.
   "payouts": {
     "enabled": true,
     // Require minimum number of peers on node
-    "requirePeers": 2,
+    "requirePeers": 5,
     // Run payouts in this interval
     "interval": "10m",
     // Gesc instance node rpc endpoint for payouts processing
